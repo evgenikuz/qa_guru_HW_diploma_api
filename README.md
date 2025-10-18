@@ -40,15 +40,14 @@
 
 ### Запуск тестов из терминала
 ```
-clean test
+clean test -Dusername=${USERNAME} -Dpassword=${PASSWORD}
 ```
-При выполнении данной команды в терминале IDE тесты запустятся локально.
+При выполнении данной команды в терминале IDE тесты запустятся локально (необходимо ввести логин и пароль).
 
 ```
-clean test -Dselenoid_login=${SELENOID_LOGIN} -Dselenoid_password=${SELENOID_PASSWORD} -DtestLaunchType=remote
+clean test -Dselenoid_url=${SELENOID_URL} -Dusername=${USERNAME} -Dpassword=${PASSWORD}
 ```
-При выполнении данной команды в терминале IDE тесты запустятся удаленно в <code>Selenoid</code>.
-(selenoid_login и selenoid_password необходимо указать)
+При выполнении данной команды в терминале IDE тесты запустятся удаленно в <code>Selenoid</code> (необходимо ввести логин, пароль и адрес селеноида).
 
 ## <img width="4%" style="vertical-align:middle" title="Jenkins" src="media/logo/Jenkins.svg"> Сборка в Jenkins
 

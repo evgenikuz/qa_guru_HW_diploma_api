@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import ui.DeleteUI;
 
 import static io.qameta.allure.Allure.step;
-import static io.qameta.allure.SeverityLevel.CRITICAL;
 import static io.qameta.allure.SeverityLevel.NORMAL;
 import static tests.TestData.PASSWORD;
 import static tests.TestData.USERNAME;
