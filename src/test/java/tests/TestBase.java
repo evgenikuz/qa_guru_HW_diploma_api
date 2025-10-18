@@ -36,9 +36,13 @@ public class TestBase {
 
     @AfterEach
     void  addAttachments() {
-//        Attach.screenshotAs("Last screenshot");
-//        Attach.pageSource();
-//        Attach.browserConsoleLogs();
-//        Attach.addVideo();
+        try {
+            Attach.screenshotAs("Last screenshot");
+            Attach.pageSource();
+            Attach.browserConsoleLogs();
+            Attach.addVideo();
+        } catch (Exception e) {
+            System.out.println("Browser not available for API test: " + e.getMessage());
+        }
     }
 }
