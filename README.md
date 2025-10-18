@@ -53,7 +53,7 @@ clean test -Dselenoid_url=${SELENOID_URL} -Dusername=${USERNAME} -Dpassword=${PA
 
 Для запуска сборки необходимо перейти в раздел <code>Build with Parameters</code> и нажать кнопку <code>Build</code>.
 <p align="center">
-<img title="Jenkins Build" src="media/screens/jenkins.jpg">
+<img title="Jenkins Build" src="media/screens/jenkins.png">
 </p>
 После выполнения сборки, в блоке <code>История сборок</code> напротив номера сборки появятся значки <code>Allure Report</code> и <code>Allure TestOps</code>, при клике на которые откроется страница с сформированным html-отчетом и тестовой документацией соответственно.
 
