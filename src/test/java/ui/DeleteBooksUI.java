@@ -10,7 +10,7 @@ import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static io.qameta.allure.Allure.step;
 
-public class DeleteUI {
+public class DeleteBooksUI {
     ProfilePage profilePage = new ProfilePage();
     public void DeleteAllBooksWithUI(LoginResponseModel loginResponse, LoginBodyModel userData, AddListOfBooksResponseModel bookResponse) {
         step("Authorization with api", () -> {
@@ -25,6 +25,7 @@ public class DeleteUI {
                 .removeAds()
                 .clickOnDeleteAllBooksButton()
                 .clickOnOkButton()
-                .closeConfirmationWindow();
+                .closeConfirmationWindow()
+                .logout();
     }
 }

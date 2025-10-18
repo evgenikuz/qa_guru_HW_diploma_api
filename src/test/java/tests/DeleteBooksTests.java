@@ -6,7 +6,7 @@ import io.qameta.allure.*;
 import models.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import ui.DeleteUI;
+import ui.DeleteBooksUI;
 
 import static io.qameta.allure.Allure.step;
 import static io.qameta.allure.SeverityLevel.NORMAL;
@@ -20,7 +20,7 @@ public class DeleteBooksTests extends TestBase {
     AccountApi accountApi = new AccountApi();
     BookStoreApi bookApi = new BookStoreApi();
     AddListOfBooksBodyModel bookData = new AddListOfBooksBodyModel();
-    DeleteUI deleteUI = new DeleteUI();
+    DeleteBooksUI deleteBooksUI = new DeleteBooksUI();
 
     @Test
     @DisplayName("Кнопка Delete All Books в профиле удаляет все книги из профиля")
@@ -42,7 +42,7 @@ public class DeleteBooksTests extends TestBase {
             bookApi.booksCheck(bookResponse));
 
         step("Delete all books with UI", () ->
-            deleteUI.DeleteAllBooksWithUI(loginResponse, userData, bookResponse));
+            deleteBooksUI.DeleteAllBooksWithUI(loginResponse, userData, bookResponse));
 
         GetListOfBooksResponseModel userBookResponse = step("Make request to get a list of user's books", () ->
                 accountApi.getUserBookResponse(loginResponse));

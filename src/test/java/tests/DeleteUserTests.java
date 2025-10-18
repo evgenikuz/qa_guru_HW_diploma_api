@@ -7,6 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pages.LoginPage;
 import pages.ProfilePage;
+import ui.LoginUI;
 
 import static io.qameta.allure.Allure.step;
 import static io.qameta.allure.SeverityLevel.CRITICAL;
@@ -18,6 +19,9 @@ public class DeleteUserTests extends TestBase {
     AccountApi accountApi = new AccountApi();
     LoginBodyModel loginUserData = new LoginBodyModel(usernameForSuccessfulCreation, passwordForSuccessfulCreation);
     CreateUserBodyModel newUserData = new CreateUserBodyModel(usernameForSuccessfulCreation, passwordForSuccessfulCreation);
+    LoginPage loginPage = new LoginPage();
+    LoginUI loginUI = new LoginUI();
+//    ProfilePage profilePage = new ProfilePage();
 
     @Test
     @DisplayName("После удаления пользователя невозможна авторизация с его данными")
@@ -25,23 +29,21 @@ public class DeleteUserTests extends TestBase {
     @Owner("KharitonovaES")
     @Severity(CRITICAL)
     public void deleteUserTestWithUiChecks() {
-        LoginPage loginPage = new LoginPage();
-        ProfilePage profilePage = new ProfilePage();
-
         CreateUserResponseModel userResponse  = step("Create new account", () ->
                 accountApi.createUserResponse(newUserData));
 
         step("Check account created successfully", () ->
                 accountApi.createUserCheck(newUserData, userResponse));
 
-        loginPage.openPage()
-                .removeAds()
-                .addUsername(newUserData)
-                .addPassword(newUserData)
-                .clickLogin()
-                .checkLoginSuccessful();
-        profilePage.openPage(loginUserData)
-                .logout();
+        loginUI.loginUI(newUserData, loginUserData);
+//        loginPage.openPage()
+//                .removeAds()
+//                .addUsername(newUserData)
+//                .addPassword(newUserData)
+//                .clickLogin()
+//                .checkLoginSuccessful();
+//        profilePage.openPage(loginUserData)
+//                .logout();
 
         GetTokenResponseModel getTokenResponse = step("Get token", () ->
                 accountApi.getTokenResponse(newUserData));
