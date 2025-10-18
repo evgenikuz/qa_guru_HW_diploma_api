@@ -12,7 +12,7 @@ import static io.qameta.allure.Allure.step;
 
 public class DeleteUI {
     ProfilePage profilePage = new ProfilePage();
-    public void DeleteBookWithUI(LoginResponseModel loginResponse, LoginBodyModel userData, AddListOfBooksResponseModel bookResponse) {
+    public void DeleteAllBooksWithUI(LoginResponseModel loginResponse, LoginBodyModel userData, AddListOfBooksResponseModel bookResponse) {
         step("Authorization with api", () -> {
             open("/favicon.ico");
             getWebDriver().manage().addCookie(new Cookie("userName", loginResponse.getUsername()));
@@ -23,7 +23,7 @@ public class DeleteUI {
 
         profilePage.openPage(userData)
                 .removeAds()
-                .clickOnBinIcon("Learning JavaScript Design Patterns")
+                .clickOnDeleteAllBooksButton()
                 .clickOnOkButton()
                 .closeConfirmationWindow();
     }

@@ -1,50 +1,54 @@
 package tests;
 
-import api.BookListApi;
-import api.LoginApi;
+import api.BookStoreApi;
+import api.AccountApi;
+import io.qameta.allure.*;
 import models.*;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import ui.DeleteUI;
 
 import static io.qameta.allure.Allure.step;
+import static io.qameta.allure.SeverityLevel.CRITICAL;
+import static io.qameta.allure.SeverityLevel.NORMAL;
 import static tests.TestData.PASSWORD;
 import static tests.TestData.USERNAME;
 
+@Epic("Работа с профилем")
+@Feature("Удаление книг")
 public class DeleteBooksTests extends TestBase {
     LoginBodyModel userData = new LoginBodyModel(USERNAME, PASSWORD);
-    LoginApi loginApi = new LoginApi();
-
-    BookListApi bookApi = new BookListApi();
+    AccountApi accountApi = new AccountApi();
+    BookStoreApi bookApi = new BookStoreApi();
     AddListOfBooksBodyModel bookData = new AddListOfBooksBodyModel();
-
     DeleteUI deleteUI = new DeleteUI();
 
     @Test
-    public void deleteOneOfItemsTest() {
+    @DisplayName("Кнопка Delete All Books в профиле удаляет все книги из профиля")
+    @Story("Удаление всех книг по кнопке в профиле")
+    @Owner("KharitonovaES")
+    @Severity(NORMAL)
+    public void deleteAllBooksTest() {
         LoginResponseModel loginResponse = step("Make login request", () ->
-                loginApi.login(userData));
+                accountApi.login(userData));
 
-        step("Check login successful", () -> {
-            loginApi.loginCheck(userData, loginResponse);
-        });
+        step("Check login successful", () ->
+            accountApi.loginCheck(userData, loginResponse));
 
-        bookApi.addBookToISBNCollection(bookData, loginResponse);
-        AddListOfBooksResponseModel bookResponse = step("Make request to add list of books to profile", () ->
+        bookApi.addAllBooksToIsbnCollection(bookData, loginResponse);
+        AddListOfBooksResponseModel bookResponse = step("Make request to add list of all books to profile", () ->
                 bookApi.bookAdd(bookData, loginResponse));
 
-        step("Check books are added", () -> {
-            bookApi.booksCheck(bookResponse);
-        });
+        step("Check all books are added", () ->
+            bookApi.booksCheck(bookResponse));
 
-        step("Delete a book with UI", () -> {
-            deleteUI.DeleteBookWithUI(loginResponse, userData, bookResponse);
-        });
+        step("Delete all books with UI", () ->
+            deleteUI.DeleteAllBooksWithUI(loginResponse, userData, bookResponse));
 
         GetListOfBooksResponseModel userBookResponse = step("Make request to get a list of user's books", () ->
-                loginApi.getUserBookResponse(loginResponse));
+                accountApi.getUserBookResponse(loginResponse));
 
-        step("Confirm removal with api by response", () -> {
-            loginApi.usersBookListCheck(userData, loginResponse, bookResponse, userBookResponse);
-        });
+        step("Confirm removal of all books with api by response", () ->
+            accountApi.emptyUsersBookListCheck(userData, loginResponse, bookResponse, userBookResponse));
     }
 }

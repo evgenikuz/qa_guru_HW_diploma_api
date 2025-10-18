@@ -12,7 +12,8 @@ import static io.qameta.allure.Allure.step;
 public class ProfilePage {
     public SelenideElement userName = $("#userName-value"),
             OkButton = $("#closeSmallModal-ok");
-    public ElementsCollection bookNames = $$(".mr-2");
+    public ElementsCollection bookNames = $$(".mr-2"),
+                                buttons = $$("#submit");
     public String deletedRow = ".rt-tr",
                  binIcon = "#delete-record-undefined";
 
@@ -32,23 +33,23 @@ public class ProfilePage {
         return this;
     }
 
-    public ProfilePage clickOnBinIcon(String deletedBookTitle) {
-        step("Click delete icon with UI", () -> {
-            bookNames.findBy(text(deletedBookTitle)).closest(deletedRow).$(binIcon).click();
-        });
+    public ProfilePage clickOnDeleteAllBooksButton() {
+        step("Click on Delete All Books button", () -> buttons.findBy(text("Delete All Books")).click());
         return this;
     }
 
     public ProfilePage clickOnOkButton() {
-        step("Confirm removal of a book with UI", () -> {
-        OkButton.click();
-    });
+        step("Confirm removal of a book with UI", () -> OkButton.click());
         return this;
     }
     public ProfilePage closeConfirmationWindow() {
-    step("Close browser confirmation window with UI", () -> {
-        Selenide.confirm();
-    });
+    step("Close browser confirmation window with UI", () -> Selenide.confirm());
+        return this;
+    }
+
+    public ProfilePage logout() {
+        step("Logout with UI", () -> buttons.findBy(text("Log Out")).click());
         return this;
     }
 }
+
