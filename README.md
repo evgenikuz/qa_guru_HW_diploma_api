@@ -97,7 +97,7 @@ clean test -DtestLaunchType=remote
 <img title="Allure TestOps DashBoard" src="media/screens/testops.png">
 </p>
 
-### <b><a target="_blank" href="https://allure.autotests.cloud/launch/48835/tree/734119?search=W3siaWQiOiJzdGF0dXMiLCJ0eXBlIjoidGVzdFN0YXR1c0FycmF5IiwidmFsdWUiOlsicGFzc2VkIl19XQ%3D%3D&treeId=0">Результат выполнения автотеста</a></b>
+### <b><a target="_blank" href="https://allure.autotests.cloud/launch/48835/tree/734119?search=W3siaWQiOiJzdGF0dXMiLCJ0eXBlIjoidGVzdFN0YXR1c0FycmF5IiwidmFsdWUiOlsicGFzc2VkIl19XQ%3D%3D&treeId=0">Результат выполнения автотестов</a></b>
 
 <p align="center">
 <img title="Test Results in Alure TestOps" src="media/screens/testopsResults.png">
