@@ -1,4 +1,4 @@
-# Проект по автоматизации тестовых сценариев для сайта DemoQA
+# Проект по автоматизации тестовых сценариев для сайта DemoQA (Книжный магазин)
 ## :scroll: Содержание:
 
 - [Используемый стек](#computer-используемый-стек)
@@ -29,27 +29,52 @@
 При прогоне тестов для запуска браузеров используется [Selenoid](https://selenoid.autotests.cloud).
 Для удаленного запуска реализована джоба в <code>Jenkins</code> с формированием Allure-отчета и отправкой результатов в <code>Telegram</code> при помощи бота. Так же реализована интеграция с <code>Allure TestOps</code>.
 
-Содержание Allure-отчета:
-* Шаги теста;
-* Скриншот страницы на последнем шаге;
-* Page Source;
-* Логи браузерной консоли;
-* Видео выполнения автотеста.
+**Особенности проекта**:
+- `Page Object` шаблон проектирования
+- Использование технологии `Owner` для придания тестам гибкости и легкости конфигурации
+- Возможность запуска тестов: локально, удалённо, по тегам
+- Использование `Faker` для генерации данных
+- Использование `Lombok` для моделей в API тестах
+- Возможность запуска тестов напрямую из Allure TestOps
+- Уведомление о результатах прохождения в Telegram
+- По итогу прохождения автотестов генерируется Allure отчет. Содержание отчета:
+    - Шаги теста
+    - Скриншот страницы на последнем шаге
+    - Исходный код страницы в браузере
+    - Логи консоли браузера
+    - Видео выполнения автотеста
+
+## Реализованные проверки
+### Web + Api
+- [x] Проверка удаления всех книг из профиля по кнопке "Удалить всё"
+- [x] Проверка авторизации после создания пользователя и после его удаления
+
+### Api
+- [x] Выполнение успешного запроса на авторизацию
+- [x] Выполнение успешного запроса на авторизацию (намеренно пропущен, так как там найден баг)
+- [x] Выполнение успешного запроса на создание нового пользователя
+- [x] Выполнение неудачного запроса на создание нового пользователя с пустым телом
+- [x] Выполнение неудачного запроса на создание нового пользователя с данными существующего пользователя
+- [x] Выполнение запроса на удаление пользователя
+- [x] Запрос текущего списка книг
 
 ## :arrow_forward: Запуск автотестов
 
+Конфигурационные файлы `.config` лежат в папке `resources`. <br/>
+При необходимости можно изменить их.
+
 ### Запуск тестов из терминала
 ```
-clean test -Dusername=${USERNAME} -Dpassword=${PASSWORD}
+clean test
 ```
-При выполнении данной команды в терминале IDE тесты запустятся локально (необходимо ввести логин и пароль).
+При выполнении данной команды в терминале IDE тесты запустятся локально (значение по-умолчанию).
 
 ```
-clean test -Dselenoid_url=${SELENOID_URL} -Dusername=${USERNAME} -Dpassword=${PASSWORD}
+clean test -DtestLaunchType=remote
 ```
-При выполнении данной команды в терминале IDE тесты запустятся удаленно в <code>Selenoid</code> (необходимо ввести логин, пароль и адрес селеноида).
+При выполнении данной команды в терминале IDE тесты запустятся удаленно в Docker-контейнере <code>Selenoid</code>.
 
-## <img width="4%" style="vertical-align:middle" title="Jenkins" src="media/logo/Jenkins.svg"> Сборка в Jenkins
+## <img width="4%" style="vertical-align:middle" title="Jenkins" src="media/logo/Jenkins.svg"> Сборка в <b><a target="_blank" href="https://jenkins.autotests.cloud/job/c36-evded-qa-guru-diploma-api/">Jenkins</a></b>
 
 Для запуска сборки необходимо перейти в раздел <code>Build with Parameters</code> и нажать кнопку <code>Build</code>.
 <p align="center">
@@ -57,14 +82,14 @@ clean test -Dselenoid_url=${SELENOID_URL} -Dusername=${USERNAME} -Dpassword=${PA
 </p>
 После выполнения сборки, в блоке <code>История сборок</code> напротив номера сборки появятся значки <code>Allure Report</code> и <code>Allure TestOps</code>, при клике на которые откроется страница с сформированным html-отчетом и тестовой документацией соответственно.
 
-## <img width="4%" style="vertical-align:middle" title="Allure Report" src="media/logo/Allure_Report.svg"> Пример Allure-отчета
+## <img width="4%" style="vertical-align:middle" title="Allure Report" src="media/logo/Allure_Report.svg"> Пример <b><a target="_blank" href="https://jenkins.autotests.cloud/job/c36-evded-qa-guru-diploma-api/5/allure">Allure-отчета</a></b>
 ### Overview
 
 <p align="center">
 <img title="Allure Overview" src="media/screens/allure.png">
 </p>
 
-## <img width="4%" style="vertical-align:middle" title="Allure TestOps" src="media/logo/AllureTestOps.svg"> Интеграция с Allure TestOps
+## <img width="4%" style="vertical-align:middle" title="Allure TestOps" src="media/logo/AllureTestOps.svg"> Интеграция с <b><a target="_blank" href="https://allure.autotests.cloud/project/4964/dashboards">Allure TestOps</a></b>
 
 На *Dashboard* в <code>Allure TestOps</code> видна статистика количества тестов: сколько из них добавлены и проходятся вручную, сколько автоматизированы. Новые тесты, а так же результаты прогона приходят по интеграции при каждом запуске сборки.
 
@@ -72,7 +97,7 @@ clean test -Dselenoid_url=${SELENOID_URL} -Dusername=${USERNAME} -Dpassword=${PA
 <img title="Allure TestOps DashBoard" src="media/screens/testops.png">
 </p>
 
-### Результат выполнения автотеста
+### <b><a target="_blank" href="https://allure.autotests.cloud/launch/48835/tree/734119?search=W3siaWQiOiJzdGF0dXMiLCJ0eXBlIjoidGVzdFN0YXR1c0FycmF5IiwidmFsdWUiOlsicGFzc2VkIl19XQ%3D%3D&treeId=0">Результат выполнения автотеста</a></b>
 
 <p align="center">
 <img title="Test Results in Alure TestOps" src="media/screens/testopsResults.png">
