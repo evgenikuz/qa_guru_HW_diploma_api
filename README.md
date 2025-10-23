@@ -90,15 +90,27 @@
 >- *remote* - для удаленного запуска
 
 ### Запуск тестов из терминала
+ля локального запуска тестов в терминале IDE нужно ввести:
 ```
 clean test
 ```
-При выполнении данной команды в терминале IDE тесты запустятся локально (значение по-умолчанию).
-
+Для удаленного запуска в Docker-контейнере <code>Selenoid</code> в терминале IDE нужно ввести:
 ```
-clean test -DtestLaunchType=remote
+clean test -DtestLaunchType=remote -Dusername=${SELENOID_USERNAME} -Dpassword=${SELENOID_PASSWORD} -Dusername=${USERNAME} -Dpassword=${PASSWORD} 
 ```
-При выполнении данной команды в терминале IDE тесты запустятся удаленно в Docker-контейнере <code>Selenoid</code>.
+Самые любопытные могут попробовать изменить параметры:
+```
+clean test -DtestLaunchType=${TEST_LAUNCH_TYPE} -Dselenoid.username=${SELENOID_USERNAME} -Dselenoid.password=${SELENOID_PASSWORD} -Dusername=${USERNAME} -Dpassword=${PASSWORD} -Dbrowser.name=${BROWSER_NAME} -Dbrowser.version=${BROWSER_VERSION} -Dbrowser.size=${BROWSER_SIZE} -Dremote.url=${SELENOID_URL}
+```
+- `-DtestLaunchType` - параметр, позволяющий выбрать запуск удаленно <code>remote</code> или локально <code>local</code>.
+- `-Dselenoid.username` - имя юзера в Selenoid.
+- `-Dselenoid.password` - пароль юзера в Selenoid.
+- `-Dusername` - имя юзера для авторизации в книжном магазине.
+- `-Dpassword` - пароль юзера для авторизации в книжном магазине.
+- `-Dbrowser.name` - параметр, позволяющий выбрать браузер <code>chrome</code> или <code>firefox</code>.
+- `-Dbrowser.version` - параметр, позволяющий выбрать версию chrome <code>127.0, 128.0</code> или firefox <code>124.0, 125.0</code>.
+- `-Dbrowser.size` - параметр, позволяющий выбрать размер браузера <code>1980x1080, 1280x1024, 800x600</code>.
+- `-Dremote.url` - параметр, позволяющий выбрать адрес удаленного сервера Selenoid.
 
 ## <img width="4%" style="vertical-align:middle" title="Jenkins" src="media/logo/Jenkins.svg"> Сборка в <b><a target="_blank" href="https://jenkins.autotests.cloud/job/c36-evded-qa-guru-diploma-api/">Jenkins</a></b>
 
