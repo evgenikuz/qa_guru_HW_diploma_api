@@ -1,5 +1,8 @@
 # Проект по автоматизации тестовых сценариев для сайта [DemoQA (Книжный магазин)](https://demoqa.com/books)
+
+<div align="center">
 <img width="500px" title="Wikipedia" src="media/logo/Bookstore.jpg">
+</div>
 
 ## :scroll: Содержание:
 
@@ -27,17 +30,27 @@
 <img width="6%" title="Telegram" src="media/logo/Telegram.svg">
 </p>
 
-Тесты в данном проекте написаны на языке <code>Java</code> с использованием фреймворка для тестирования [Selenide](https://selenide.org/), сборщик - <code>Gradle</code>. <code>JUnit 5</code> задействован в качестве фреймворка модульного тестирования. Тесты содержат API и UI тесты.
-При прогоне тестов для запуска браузеров используется [Selenoid](https://selenoid.autotests.cloud).
-Для удаленного запуска реализована джоба в <code>Jenkins</code> с формированием Allure-отчета и отправкой результатов в <code>Telegram</code> при помощи бота. Так же реализована интеграция с <code>Allure TestOps</code>.
+Автотесты в этом проекте написаны на `Java` с использованием фреймворка `Selenide`.\
+`Gradle` - используется как инструмент автоматизации сборки.  \
+`JUnit5` - для выполнения тестов.\
+`REST Assured` - для тестирования REST-API сервисов.\
+`Jenkins` - CI/CD для запуска тестов удаленно.\
+`Selenoid` - для удаленного запуска браузера в `Docker` контейнерах.\
+`Allure Report` - для визуализации результатов тестирования.\
+`Telegram Bot` - для уведомлений о результатах тестирования.\
+`Allure TestOps` - как система управления тестированием.
 
 **Особенности проекта**:
 - `Page Object` шаблон проектирования
-- Использование технологии `Owner` для придания тестам гибкости и легкости конфигурации
+- Различные конфигурации для запуска теста в зависимости от параметров сборки
+- Использование библиотеки `Owner`
 - Возможность запуска тестов: локально, удалённо, по тегам
 - Использование `Faker` для генерации данных
 - Использование `Lombok` для моделей в API тестах
+- Использование request/response спецификаций для API тестов
+- Custom Allure listener для API requests/responses логов
 - Возможность запуска тестов напрямую из Allure TestOps
+- Автотесты как тестовая документация
 - Уведомление о результатах прохождения в Telegram
 - По итогу прохождения автотестов генерируется Allure отчет. Содержание отчета:
     - Шаги теста
@@ -62,8 +75,18 @@
 
 ## :arrow_forward: Запуск автотестов
 
-Конфигурационные файлы `.config` лежат в папке `resources`. <br/>
-При необходимости можно изменить их.
+Дополнительные свойства извлекаются из соответствующего файла конфигурации (в зависимости от значения `testLaunchType`):
+```
+./resources/${testLaunchType}.config
+```
+Логин и пароль пользователя извлекаются из файла конфигурации:
+```
+./resources/user.config
+```
+
+`testLaunchType` - определяет среду для запуска тестов:
+>- *local* - для локального запуска (значение по-умолчанию)
+>- *remote* - для удаленного запуска
 
 ### Запуск тестов из терминала
 ```
@@ -87,13 +110,26 @@ clean test -DtestLaunchType=remote
 ## <img width="4%" style="vertical-align:middle" title="Allure Report" src="media/logo/Allure_Report.svg"> Пример <b><a target="_blank" href="https://jenkins.autotests.cloud/job/c36-evded-qa-guru-diploma-api/5/allure">Allure-отчета</a></b>
 ### Overview
 
+Главная страница отчета Allure содержит следующие блоки:
+
+>- <code><strong>*ALLURE REPORT*</strong></code> - отображает дату и время теста, общее количество запущенных тестов, а также диаграмму с процентом и количеством успешных, упавших и сломавшихся в процессе выполнения тестов
+>- <code><strong>*TREND*</strong></code> - отображает тенденцию выполнения тестов для всех запусков
+>- <code><strong>*SUITES*</strong></code> - отображает распределение тестов по сьютам
+>- <code><strong>*CATEGORIES*</strong></code> - отображает распределение неудачных тестов по типам дефектов
+
 <p align="center">
 <img title="Allure Overview" src="media/screens/allure.png">
 </p>
 
 ## <img width="4%" style="vertical-align:middle" title="Allure TestOps" src="media/logo/AllureTestOps.svg"> Интеграция с <b><a target="_blank" href="https://allure.autotests.cloud/project/4964/dashboards">Allure TestOps</a></b>
 
-На *Dashboard* в <code>Allure TestOps</code> видна статистика количества тестов: сколько из них добавлены и проходятся вручную, сколько автоматизированы. Новые тесты, а так же результаты прогона приходят по интеграции при каждом запуске сборки.
+Выполнена интеграция сборки <code>Jenkins</code> с <code>Allure TestOps</code>.
+Результат выполнения автотестов отображается в <code>Allure TestOps</code>
+На Dashboard в <code>Allure TestOps</code> отображена статистика пройденных тестов.
+
+Тест-кейсы в проекте импортируются и постоянно обновляются из кода,
+поэтому нет необходимости в синхронизации ручных тест-кейсов и автотестов.\
+Достаточно создать и обновить автотест в коде и тест-кейс всегда будет в актуальном состоянии.
 
 <p align="center">
 <img title="Allure TestOps DashBoard" src="media/screens/testops.png">
@@ -115,7 +151,7 @@ clean test -DtestLaunchType=remote
 
 ### <img width="4%" style="vertical-align:middle" title="Selenoid" src="media/logo/Selenoid.svg"> Видео примера запуска тестов в Selenoid
 
-В отчетах Allure для каждого теста прикреплен не только скриншот, но и видео прохождения теста
+В отчетах Allure для каждого теста прикреплено видео прохождения теста
 <p align="center">
   <img title="Selenoid Video" src="media/video/tests.gif">
 </p>
