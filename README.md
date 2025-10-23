@@ -137,7 +137,7 @@ clean test -DtestLaunchType=remote
 >- Video
 
 <p align="center">
-<img title="Allure Attaches" src="media/screens/allureAttaches.png">
+<img title="Allure Attaches" src="media/screens/allureAttaches.png" width="750">
 </p>
 
 ## <img width="4%" style="vertical-align:middle" title="Allure TestOps" src="media/logo/AllureTestOps.svg"> Интеграция с <b><a target="_blank" href="https://allure.autotests.cloud/project/4964/dashboards">Allure TestOps</a></b>
@@ -146,18 +146,24 @@ clean test -DtestLaunchType=remote
 Результат выполнения автотестов отображается в <code>Allure TestOps</code>
 На Dashboard в <code>Allure TestOps</code> отображена статистика пройденных тестов.
 
+<p align="center">
+<img title="Allure TestOps DashBoard" src="media/screens/testops.png" width="750">
+</p>
+
 Тест-кейсы в проекте импортируются и постоянно обновляются из кода,
 поэтому нет необходимости в синхронизации ручных тест-кейсов и автотестов.\
 Достаточно создать и обновить автотест в коде и тест-кейс всегда будет в актуальном состоянии.
 
+### Результат выполнения автотестов в <b><a target="_blank" href="https://allure.autotests.cloud/launch/48835/tree/734119?search=W3siaWQiOiJzdGF0dXMiLCJ0eXBlIjoidGVzdFN0YXR1c0FycmF5IiwidmFsdWUiOlsicGFzc2VkIl19XQ%3D%3D&treeId=0">TestOps</a></b>
+
 <p align="center">
-<img title="Allure TestOps DashBoard" src="media/screens/testops.png">
+<img title="Test Results in Alure TestOps" src="media/screens/testopsResults.png" width="750">
 </p>
 
-### <b><a target="_blank" href="https://allure.autotests.cloud/launch/48835/tree/734119?search=W3siaWQiOiJzdGF0dXMiLCJ0eXBlIjoidGVzdFN0YXR1c0FycmF5IiwidmFsdWUiOlsicGFzc2VkIl19XQ%3D%3D&treeId=0">Результат выполнения автотестов</a></b>
+## Allure TestOps Test Cases
 
 <p align="center">
-<img title="Test Results in Alure TestOps" src="media/screens/testopsResults.png">
+  <img src="../qa_guru_HW_diploma_mobile/media/screens/testopsTestCases.png" alt="AllureTestOpsTests" width="750">
 </p>
 
 ### <img width="4%" style="vertical-align:middle" title="Telegram" src="media/logo/Telegram.svg"> Уведомления в Telegram с использованием бота
