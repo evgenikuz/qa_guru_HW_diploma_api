@@ -24,3 +24,7 @@ out/
 
 ### env ###
 *.env
+
+### Auth ###
+auth.properties
+user.config
