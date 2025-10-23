@@ -116,9 +116,13 @@ clean test -DtestLaunchType=${TEST_LAUNCH_TYPE} -Dselenoid.username=${SELENOID_U
 
 Для запуска сборки необходимо перейти в раздел <code>Build with Parameters</code> и нажать кнопку <code>Build</code>.
 <p align="center">
+<img title="Jenkins Parameters" src="media/screens/jenkinsParameters.png">
+</p>
+
+После выполнения сборки, в блоке <code>История сборок</code> напротив номера сборки появятся значки <code>Allure Report</code> и <code>Allure TestOps</code>, при клике на которые откроется страница с сформированным html-отчетом и тестовой документацией соответственно.
+<p align="center">
 <img title="Jenkins Build" src="media/screens/jenkins.png">
 </p>
-После выполнения сборки, в блоке <code>История сборок</code> напротив номера сборки появятся значки <code>Allure Report</code> и <code>Allure TestOps</code>, при клике на которые откроется страница с сформированным html-отчетом и тестовой документацией соответственно.
 
 ## <img width="4%" style="vertical-align:middle" title="Allure Report" src="media/logo/Allure_Report.svg"> Пример <b><a target="_blank" href="https://jenkins.autotests.cloud/job/c36-evded-qa-guru-diploma-api/5/allure">Allure-отчета</a></b>
 ### Overview
