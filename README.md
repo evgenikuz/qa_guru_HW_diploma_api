@@ -17,17 +17,18 @@
 ## :computer: Используемый стек
 
 <p align="center">
-<img width="6%" title="IntelliJ IDEA" src="media/logo/Intelij_IDEA.svg">
-<img width="6%" title="Java" src="media/logo/Java.svg">
-<img width="6%" title="Selenide" src="media/logo/Selenide.svg">
-<img width="6%" title="Selenoid" src="media/logo/Selenoid.svg">
-<img width="6%" title="Allure Report" src="media/logo/Allure_Report.svg">
-<img width="5%" title="Allure TestOps" src="media/logo/AllureTestOps.svg">
-<img width="6%" title="Gradle" src="media/logo/Gradle.svg">
-<img width="6%" title="JUnit5" src="media/logo/JUnit5.svg">
-<img width="6%" title="GitHub" src="media/logo/GitHub.svg">
-<img width="6%" title="Jenkins" src="media/logo/Jenkins.svg">
-<img width="6%" title="Telegram" src="media/logo/Telegram.svg">
+<a href="https://www.jetbrains.com/idea/"><img width="6%" title="IntelliJ IDEA" src="media/logo/Intelij_IDEA.svg"></a>
+<a href="https://www.java.com/"><img width="6%" title="Java" src="media/logo/Java.svg"></a>
+<a href="https://selenide.org/"><img width="6%" title="Selenide" src="media/logo/Selenide.svg"></a>
+<a href="https://selenoid.autotests.cloud/#/"><img width="6%" title="Selenoid" src="media/logo/Selenoid.svg"></a>
+<a href="https://github.com/allure-framework/allure2"><img width="6%" title="Allure Report" src="media/logo/Allure_Report.svg"></a>
+<a href="https://qameta.io/"><img width="5%" title="Allure TestOps" src="media/logo/AllureTestOps.svg"></a>
+<a href="https://gradle.org/"><img width="6%" title="Gradle" src="media/logo/Gradle.svg"></a>
+<a href="https://junit.org/junit5/"><img width="6%" title="JUnit5" src="media/logo/JUnit5.svg"></a>
+<a href="https://rest-assured.io/"><img width="5%" title="RestAssured" src="./media/logo/RestAssured.svg"></a>
+<a href="https://github.com/"><img width="6%" title="GitHub" src="media/logo/GitHub.svg"></a>
+<a href="https://www.jenkins.io/"><img width="6%" title="Jenkins" src="media/logo/Jenkins.svg"></a>
+<a href="https://web.telegram.org/"><img width="6%" title="Telegram" src="media/logo/Telegram.svg"></a>
 </p>
 
 Автотесты в этом проекте написаны на `Java` с использованием фреймворка `Selenide`.\
@@ -44,7 +45,7 @@
 - `Page Object` шаблон проектирования
 - Различные конфигурации для запуска теста в зависимости от параметров сборки
 - Использование библиотеки `Owner`
-- Возможность запуска тестов: локально, удалённо, по тегам
+- Возможность запуска тестов локально или удалённо
 - Использование `Faker` для генерации данных
 - Использование `Lombok` для моделей в API тестах
 - Использование request/response спецификаций для API тестов
@@ -118,7 +119,25 @@ clean test -DtestLaunchType=remote
 >- <code><strong>*CATEGORIES*</strong></code> - отображает распределение неудачных тестов по типам дефектов
 
 <p align="center">
-<img title="Allure Overview" src="media/screens/allure.png">
+<img title="Allure Overview" src="media/screens/allureMain.png">
+</p>
+
+### Список тестов с шагами и тестовыми артефактами
+На странице список тестов, сгруппированных по наборам, с указанием статуса для каждого теста.\
+Может быть показана полная информация о каждом тесте: теги, продолжительность, подробные шаги.
+
+<p align="center">
+  <img src="media/screens/allureSuits.png" alt="AllureSuites" width="750">
+</p>
+
+Также доступны дополнительные тестовые артефакты:
+>- Screenshot
+>- Page Source
+>- Browser console log
+>- Video
+
+<p align="center">
+<img title="Allure Attaches" src="media/screens/allureAttaches.png">
 </p>
 
 ## <img width="4%" style="vertical-align:middle" title="Allure TestOps" src="media/logo/AllureTestOps.svg"> Интеграция с <b><a target="_blank" href="https://allure.autotests.cloud/project/4964/dashboards">Allure TestOps</a></b>
