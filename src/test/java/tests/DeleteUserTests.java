@@ -6,7 +6,6 @@ import models.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pages.LoginPage;
-import pages.ProfilePage;
 import ui.LoginUI;
 
 import static io.qameta.allure.Allure.step;
@@ -21,7 +20,6 @@ public class DeleteUserTests extends TestBase {
     CreateUserBodyModel newUserData = new CreateUserBodyModel(usernameForSuccessfulCreation, passwordForSuccessfulCreation);
     LoginPage loginPage = new LoginPage();
     LoginUI loginUI = new LoginUI();
-//    ProfilePage profilePage = new ProfilePage();
 
     @Test
     @DisplayName("После удаления пользователя невозможна авторизация с его данными")
@@ -36,14 +34,6 @@ public class DeleteUserTests extends TestBase {
                 accountApi.createUserCheck(newUserData, userResponse));
 
         loginUI.loginUI(newUserData, loginUserData);
-//        loginPage.openPage()
-//                .removeAds()
-//                .addUsername(newUserData)
-//                .addPassword(newUserData)
-//                .clickLogin()
-//                .checkLoginSuccessful();
-//        profilePage.openPage(loginUserData)
-//                .logout();
 
         GetTokenResponseModel getTokenResponse = step("Get token", () ->
                 accountApi.getTokenResponse(newUserData));

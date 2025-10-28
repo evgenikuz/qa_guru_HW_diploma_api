@@ -109,7 +109,7 @@ gradle clean test -DtestLaunchType=${TEST_LAUNCH_TYPE} -Dselenoid.username=${SEL
 - `-Dpassword` - пароль юзера для авторизации в книжном магазине.
 - `-Dbrowser.name` - параметр, позволяющий выбрать браузер <code>chrome</code> или <code>firefox</code>.
 - `-Dbrowser.version` - параметр, позволяющий выбрать версию chrome <code>127.0, 128.0</code> или firefox <code>124.0, 125.0</code>.
-- `-Dbrowser.size` - параметр, позволяющий выбрать размер браузера <code>1980x1080, 1280x1024, 800x600</code>.
+- `-Dbrowser.size` - параметр, позволяющий выбрать размер браузера <code>1980x1080, 1280x1024, 1366x768</code>.
 - `-Dremote.url` - параметр, позволяющий выбрать адрес удаленного сервера Selenoid.
 
 ## <img width="4%" style="vertical-align:middle" title="Jenkins" src="media/logo/Jenkins.svg"> Сборка в <b><a target="_blank" href="https://jenkins.autotests.cloud/job/c36-evded-qa-guru-diploma-api/">Jenkins</a></b>
