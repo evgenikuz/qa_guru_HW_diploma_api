@@ -90,14 +90,36 @@
 >- *remote* - для удаленного запуска
 
 ### Запуск тестов из терминала
-Для локального запуска тестов в терминале IDE нужно ввести:
+Для успешного запуска в папке resources локально можно создать файл user.config со следующим содержимым:
+```
+username=${USERNAME}
+password=${PASSWORD}
+```
+Где в качестве переменных указать логин и пароль юзера Selenoid.
+- `${USERNAME}` - имя юзера в книжном магазине.
+- `${PASSWORD}` - пароль юзера в книжном магазине.
+
+Затем для локального запуска тестов в терминале IDE нужно ввести:
 ```
 gradle clean test
 ```
-Для удаленного запуска в Docker-контейнере <code>Selenoid</code> в терминале IDE нужно ввести:
+Если файл user.config создан не был, то к скрипту следует добавить `-Dusername=${USERNAME} -Dpassword=${PASSWORD}`.
+
+Для удаленного запуска в Docker-контейнере <code>Selenoid</code> в папке resources локально можно создать файл auth.properties со следующим содержимым:
 ```
-gradle clean test -DtestLaunchType=remote -Dusername=${SELENOID_USERNAME} -Dpassword=${SELENOID_PASSWORD} -Dusername=${USERNAME} -Dpassword=${PASSWORD} 
+selenoid.username=${SELENOID_USERNAME}
+selenoid.password=${SELENOID_PASSWORD}
 ```
+Где в качестве переменных указать логин и пароль юзера Selenoid.
+- `${SELENOID_USERNAME}` - имя юзера в Selenoid.
+- `${SELENOID_PASSWORD}` - пароль юзера в Selenoid.
+
+Затем в терминале IDE нужно ввести:
+```
+gradle clean test -DtestLaunchType=remote
+```
+Если файлы user.config и auth.properties созданы не были, то к скрипту следует добавить `-Dselenoid.username=${SELENOID_USERNAME} -Dselenoid.password=${SELENOID_PASSWORD} -Dusername=${USERNAME} -Dpassword=${PASSWORD}`.
+
 Самые любопытные могут попробовать изменить параметры:
 ```
 gradle clean test -DtestLaunchType=${TEST_LAUNCH_TYPE} -Dselenoid.username=${SELENOID_USERNAME} -Dselenoid.password=${SELENOID_PASSWORD} -Dusername=${USERNAME} -Dpassword=${PASSWORD} -Dbrowser.name=${BROWSER_NAME} -Dbrowser.version=${BROWSER_VERSION} -Dbrowser.size=${BROWSER_SIZE} -Dremote.url=${SELENOID_URL}
