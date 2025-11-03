@@ -49,7 +49,7 @@ public class LoginPage {
 
     @Step("Check URL")
     public LoginPage checkLoginSuccessful() {
-        webdriver().shouldHave(url("https://demoqa.com/profile")));
+        webdriver().shouldHave(url("https://demoqa.com/profile"));
         return this;
     }
 
