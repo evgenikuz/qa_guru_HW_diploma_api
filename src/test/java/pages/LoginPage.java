@@ -1,13 +1,13 @@
 package pages;
 
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 import models.CreateUserBodyModel;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static com.codeborne.selenide.WebDriverConditions.url;
-import static io.qameta.allure.Allure.step;
 
 public class LoginPage {
     public SelenideElement header = $("h1"),
@@ -16,44 +16,47 @@ public class LoginPage {
             loginButton = $("#login"),
             errorText = $("#name");
 
+    @Step("Open login page")
     public LoginPage openPage() {
-        step("Open login page", () -> open("/login"));
+        open("/login");
         return this;
     }
 
+    @Step("Remove ads")
     public LoginPage removeAds() {
-        step("Remove ads", () -> {
-            executeJavaScript("$('footer').remove();");
-            executeJavaScript("$('#fixedban').remove();");
-        });
+        executeJavaScript("$('footer').remove();");
+        executeJavaScript("$('#fixedban').remove();");
         return this;
     }
 
+    @Step("Insert username")
     public LoginPage addUsername(CreateUserBodyModel newUserData) {
-        step("Insert username", () -> inputUsername.sendKeys(newUserData.getUsername()));
+        inputUsername.sendKeys(newUserData.getUsername());
         return this;
     }
 
+    @Step("Insert password")
     public LoginPage addPassword(CreateUserBodyModel newUserData) {
-        step("Insert password", () -> inputPassword.sendKeys(newUserData.getPassword()));
+        inputPassword.sendKeys(newUserData.getPassword());
         return this;
     }
 
+    @Step("Click on Login button")
     public LoginPage clickLogin() {
-        step("Click on Login button", () -> loginButton.click());
+        loginButton.click();
         return this;
     }
 
+    @Step("Check URL")
     public LoginPage checkLoginSuccessful() {
-        step("Check URL", () -> webdriver().shouldHave(url("https://demoqa.com/profile")));
+        webdriver().shouldHave(url("https://demoqa.com/profile")));
         return this;
     }
 
+    @Step("Check unsuccessful login")
     public LoginPage checkLoginUnsuccessful() {
-        step("Check unsuccessful login", () -> {
-            errorText.shouldHave(text("Invalid username or password!"));
-            webdriver().shouldNotHave(url("https://demoqa.com/profile"));
-        });
+        errorText.shouldHave(text("Invalid username or password!"));
+        webdriver().shouldNotHave(url("https://demoqa.com/profile"));
         return this;
     }
 

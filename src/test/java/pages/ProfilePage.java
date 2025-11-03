@@ -3,52 +3,53 @@ package pages;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 import models.LoginBodyModel;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
-import static io.qameta.allure.Allure.step;
 
 public class ProfilePage {
     public SelenideElement userName = $("#userName-value"),
             OkButton = $("#closeSmallModal-ok");
     public ElementsCollection bookNames = $$(".mr-2"),
                                 buttons = $$("#submit");
-    public String deletedRow = ".rt-tr",
-                 binIcon = "#delete-record-undefined";
 
+    @Step("Open UI profile")
     public ProfilePage openPage(LoginBodyModel userData) {
-        step("Open UI profile", () -> {
-            open("/profile");
-            userName.shouldHave(text(userData.getUserName()));
-        });
+        open("/profile");
+        userName.shouldHave(text(userData.getUserName()));
         return this;
     }
 
+    @Step("Remove ads")
     public ProfilePage removeAds() {
-    step("Remove ads", () -> {
         executeJavaScript("$('footer').remove();");
         executeJavaScript("$('#fixedban').remove();");
-    });
         return this;
     }
 
+    @Step("Click on Delete All Books button")
     public ProfilePage clickOnDeleteAllBooksButton() {
-        step("Click on Delete All Books button", () -> buttons.findBy(text("Delete All Books")).click());
+        buttons.findBy(text("Delete All Books")).click();
         return this;
     }
 
+    @Step("Confirm removal of a book with UI")
     public ProfilePage clickOnOkButton() {
-        step("Confirm removal of a book with UI", () -> OkButton.click());
-        return this;
-    }
-    public ProfilePage closeConfirmationWindow() {
-    step("Close browser confirmation window with UI", () -> Selenide.confirm());
+        OkButton.click();
         return this;
     }
 
+    @Step("Close browser confirmation window with UI")
+    public ProfilePage closeConfirmationWindow() {
+        Selenide.confirm();
+        return this;
+    }
+
+    @Step("Logout with UI")
     public ProfilePage logout() {
-        step("Logout with UI", () -> buttons.findBy(text("Log Out")).click());
+        buttons.findBy(text("Log Out")).click();
         return this;
     }
 }
